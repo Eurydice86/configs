@@ -2,7 +2,6 @@
  '(inhibit-startup-screen t))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-
 (setq backup-directory-alist
       `(("." . "~/.emacs.d/backups")))
 (setq auto-save-file-name-transforms
@@ -11,7 +10,7 @@
 (load custom-file t)
 
 (global-display-line-numbers-mode)
-;(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type 'relative)
 
 (keymap-global-set "C-f" 'fzf)
 
@@ -27,14 +26,18 @@
   :config
   (vertico-mode 1))
 
-					; org-mode ;
+;;; org-mode
 
 (use-package org-mode
   :hook ((org-mode . org-bullets-mode))
   :mode (("\\.org\\'" . org-mode)))
 
+;;; elisp
 
-					; Python ;
+(use-package emacs-lisp-mode
+  :hook ((emacs-lisp-mode . company-mode)))
+
+;;; Python
 
 (use-package python
   :hook ((python-ts-mode . eglot-ensure)
@@ -48,11 +51,10 @@
   :ensure t
   :hook (python-ts-mode . highlight-indent-guides-mode)
   :config
-  ;;(set-face-foreground 'highlight-indent-guides-character-face "white")
+  (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
   (setq highlight-indent-guides-method 'character))
 
-					; Rust ;
-
+;;; Rust
 
 (use-package rust-ts-mode
   :ensure t
